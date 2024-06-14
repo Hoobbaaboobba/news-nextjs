@@ -53,7 +53,7 @@ export function MainNews({ params }: MainNewsProps) {
               </div>
             ) : (
               <div
-                className="mb-1 aspect-video w-full bg-center bg-no-repeat"
+                className="mb-1 aspect-video w-full bg-cover bg-center bg-no-repeat"
                 style={{
                   backgroundImage: `url(${news.image})`,
                   backgroundSize: "object-fit",
