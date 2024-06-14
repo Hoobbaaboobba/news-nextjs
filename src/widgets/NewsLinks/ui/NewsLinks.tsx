@@ -19,7 +19,7 @@ export default function NewsLinks() {
   if (error) return "Error";
   return (
     <div className="flex w-[300px] flex-col justify-start divide-y-2 rounded-md border px-3">
-      {data.news.slice(0, 7).map((news: News, index: number) => (
+      {data.news.slice(10, 17).map((news: News, index: number) => (
         <Link
           href={`/${news.category[0]}/${transliterateText(news.title)}`}
           key={index}

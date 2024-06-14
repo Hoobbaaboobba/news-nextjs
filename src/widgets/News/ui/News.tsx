@@ -3,6 +3,8 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { MainNews } from "./MainNews";
 import { NewsLinks } from "@/widgets/NewsLinks";
+import { Suspense } from "react";
+import Loading from "./Loading";
 
 interface NewsProps {
   params?: {
@@ -16,7 +18,9 @@ export default function News({ params }: NewsProps) {
   return (
     <QueryClientProvider client={queryClient}>
       <div className="container flex gap-4">
-        <MainNews params={params} />
+        <Suspense fallback={<Loading />}>
+          <MainNews params={params} />
+        </Suspense>
         <NewsLinks />
       </div>
     </QueryClientProvider>
