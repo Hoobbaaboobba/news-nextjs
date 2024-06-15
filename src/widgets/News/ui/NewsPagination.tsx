@@ -9,13 +9,9 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/shared/ui/pagination";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
-interface NewsPaginationProps {
-  data: News[];
-}
-
-export function NewsPagination({ data }: NewsPaginationProps) {
+export function NewsPagination() {
   const searchParams = useSearchParams();
   const pageNumber = parseInt(searchParams.get("page") as string);
 
@@ -25,8 +21,8 @@ export function NewsPagination({ data }: NewsPaginationProps) {
         <PaginationItem>
           <PaginationPrevious href={`?page=${pageNumber - 1}`} />
         </PaginationItem>
-        {data.slice(0, 10).map((news, index) => (
-          <PaginationItem key={news.id}>
+        {Array.from({ length: 10 }).map((_, index) => (
+          <PaginationItem key={index}>
             <PaginationLink
               href={`?page=${index + 1}`}
               isActive={pageNumber === index + 1}

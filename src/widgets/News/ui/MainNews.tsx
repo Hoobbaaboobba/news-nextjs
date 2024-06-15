@@ -9,6 +9,7 @@ import Loading from "./Loading";
 import { NewsPagination } from "./NewsPagination";
 import { useSearchParams } from "next/navigation";
 import { transliterateText } from "@/widgets/NewsLinks/transliterate";
+import { NewsCarousel } from "./NewsCarousel";
 
 interface MainNewsProps {
   params?: {
@@ -17,60 +18,85 @@ interface MainNewsProps {
   };
 }
 
-export function MainNews({ params }: MainNewsProps) {
+export function MainNews() {
+  const searchParams = useSearchParams();
+  const queryPageNumber = searchParams.get("page") || "1";
+
   const { isPending, error, data } = useQuery({
-    queryKey: ["news"],
+    queryKey: ["mainNews"],
     queryFn: () =>
       fetch(
-        `https://api.currentsapi.services/v1/search?language=ru&=keywords${decodeURI(params?.title as string)}&apiKey=bUNuSqsvvREM5YGxOCgRlxD_7egP2CxbWO44AMiMA-HAk9s8`,
+        `https://api.currentsapi.services/v1/latest-news?language=ru&apiKey=bUNuSqsvvREM5YGxOCgRlxD_7egP2CxbWO44AMiMA-HAk9s8&page_number=${queryPageNumber}`,
       ).then((res) => res.json()),
   });
-
-  const searchParams = useSearchParams();
-  const pageNumber = parseInt(searchParams.get("page") as string);
 
   if (isPending) return <Loading />;
 
   if (error) return "Error";
 
   return (
-    <div className="flex w-full max-w-[900px] flex-col">
-      {data.news
-        .filter((e: News) =>
-          params ? transliterateText(e.title) === (params?.title as string) : e,
-        )
-        .slice(
-          pageNumber > 0 ? pageNumber - 1 : 0,
-          pageNumber > 0 ? pageNumber : 1,
-        )
-        .map((news: News, index: number) => (
-          <div key={index}>
-            {news.image === "None" ? (
+    <div className="grid w-full max-w-[900px] grid-cols-3 gap-4">
+      <div className="flex flex-col divide-y-2">
+        {data.news.slice(1, 4).map((news: News, index: number) => (
+          <Link
+            href={`/${news.category[0]}/${news.id}`}
+            key={index}
+            className="py-3"
+          >
+            {news.image === "None" && index === 0 ? (
               <div className="mb-1 flex aspect-video w-full items-center justify-center bg-gray-200">
-                <span className="text-6xl font-bold text-black/10">
+                <span className="text-4xl font-bold text-black/10">
                   News.ru
                 </span>
               </div>
             ) : (
-              <div
-                className="mb-1 aspect-video w-full bg-cover bg-center bg-no-repeat"
-                style={{
-                  backgroundImage: `url(${news.image})`,
-                  backgroundSize: "object-fit",
-                }}
-              ></div>
+              index === 0 && (
+                <div
+                  className="mb-1 aspect-video w-full bg-cover bg-center bg-no-repeat"
+                  style={{
+                    backgroundImage: `url(${news.image})`,
+                    backgroundSize: "object-fit",
+                  }}
+                ></div>
+              )
             )}
-            <span className="text-black/70">{formatDate(news.published)}</span>
-            <h1 className="mt-1 text-3xl font-bold">{news.title}</h1>
-            <p className="mt-2 text-lg">
-              {news.description}{" "}
-              <Link href={news.url} className="text-blue-600 hover:underline">
-                Читать далее
-              </Link>
-            </p>
-          </div>
+            <h2 className={`${index === 0 ? "text-md font-bold" : "text-sm"}`}>
+              {news.title}
+            </h2>
+            <span className="text-[12px] text-black/40">
+              {formatDate(news.published)}
+            </span>
+          </Link>
         ))}
-      <NewsPagination data={data.news} />
+      </div>
+      <div className="flex flex-col divide-y-2">
+        {data.news.slice(4, 9).map((news: News, index: number) => (
+          <Link
+            href={`/${news.category[0]}/${news.id}`}
+            key={index}
+            className="py-3"
+          >
+            <h2 className="text-sm">{news.title}</h2>
+            <span className="text-[12px] text-black/40">
+              {formatDate(news.published)}
+            </span>
+          </Link>
+        ))}
+      </div>
+      <div className="flex flex-col divide-y-2">
+        {data.news.slice(9, 14).map((news: News, index: number) => (
+          <Link
+            href={`/${news.category[0]}/${news.id}`}
+            key={index}
+            className="py-3"
+          >
+            <h2 className="text-sm">{news.title}</h2>
+            <span className="text-[12px] text-black/70">
+              {formatDate(news.published)}
+            </span>
+          </Link>
+        ))}
+      </div>
     </div>
   );
 }

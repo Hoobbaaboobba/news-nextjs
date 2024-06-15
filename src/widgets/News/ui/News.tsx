@@ -5,6 +5,7 @@ import { MainNews } from "./MainNews";
 import { NewsLinks } from "@/widgets/NewsLinks";
 import { Suspense } from "react";
 import Loading from "./Loading";
+import { NewsCarousel } from "./NewsCarousel";
 
 interface NewsProps {
   params?: {
@@ -14,15 +15,12 @@ interface NewsProps {
 }
 
 export default function News({ params }: NewsProps) {
-  const queryClient = new QueryClient();
   return (
-    <QueryClientProvider client={queryClient}>
-      <div className="container flex gap-4">
-        <Suspense fallback={<Loading />}>
-          <MainNews params={params} />
-        </Suspense>
-        <NewsLinks />
-      </div>
-    </QueryClientProvider>
+    <div className="container flex gap-4">
+      <Suspense fallback={<Loading />}>
+        <MainNews />
+      </Suspense>
+      <NewsLinks />
+    </div>
   );
 }

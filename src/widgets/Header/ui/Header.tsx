@@ -1,3 +1,4 @@
+import { formatDate } from "@/shared/DateFormatter";
 import { BurgerMenu } from "./BurgerMenu";
 import { Logo } from "./Logo";
 
