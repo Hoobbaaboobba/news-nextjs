@@ -16,12 +16,16 @@ interface NewsPageProps {
 export default function NewsPage({ params }: NewsPageProps) {
   const { isPending, error, data } = useQuery({
     queryKey: ["newsPage"],
-    queryFn: () => fetch(newsApi).then((res) => res.json()),
+    queryFn: () =>
+      fetch(
+        `https://api.currentsapi.services/v1/latest-news?language=ru&apiKey=bUNuSqsvvREM5YGxOCgRlxD_7egP2CxbWO44AMiMA-HAk9s8&page_size=200&category=${params.category}`,
+      ).then((res) => res.json()),
   });
 
   if (isPending) return <Loading />;
 
   if (error) return "Error";
+
   return (
     <div className="w-full max-w-[900px]">
       {data.news

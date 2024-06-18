@@ -2,7 +2,7 @@ import { Skeleton } from "@/shared/ui/skeleton";
 
 export default function Loading() {
   return (
-    <div className="flex w-[300px] flex-col justify-start divide-y-2 rounded-md border px-3">
+    <div className="hidden w-[300px] flex-col justify-start divide-y-2 rounded-md border px-3 md:flex">
       <Skeleton className="my-3 h-[20px] w-[80px]" />
       <div className="flex flex-col gap-1 py-3">
         <Skeleton className="h-[20px] w-full" />

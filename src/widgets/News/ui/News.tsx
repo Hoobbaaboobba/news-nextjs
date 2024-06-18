@@ -17,9 +17,7 @@ interface NewsProps {
 export default function News({ params }: NewsProps) {
   return (
     <div className="container flex gap-4">
-      <Suspense fallback={<Loading />}>
-        <MainNews />
-      </Suspense>
+      <MainNews params={params} />
       <NewsLinks />
     </div>
   );

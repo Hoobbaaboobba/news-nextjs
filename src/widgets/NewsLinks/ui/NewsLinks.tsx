@@ -24,7 +24,7 @@ export default function NewsLinks() {
 
   if (error) return "Error";
   return (
-    <div className="flex w-[300px] flex-col justify-start divide-y-2 overflow-y-auto rounded-md border px-3">
+    <div className="hidden w-[300px] flex-col justify-start divide-y-2 overflow-y-auto rounded-md border px-3 md:flex">
       <p className="py-2 text-lg font-bold">Главное</p>
       {data.news.slice(14, 18).map((news: News, index: number) => (
         <Link

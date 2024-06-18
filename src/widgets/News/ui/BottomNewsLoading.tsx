@@ -1,9 +1,9 @@
 import { Skeleton } from "@/shared/ui/skeleton";
 
-export default function Loading() {
+export default function BottomNewsLoading() {
   return (
-    <div className="w-full max-w-[900px]">
-      <div className="grid w-full max-w-[900px] gap-4 lg:grid-cols-2 xl:grid-cols-3">
+    <div className="container w-full">
+      <div className="grid w-full gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
         <div className="flex flex-col divide-y-2">
           {Array.from({ length: 3 }).map((_, index: number) => (
             <div key={index} className="my-3">
@@ -12,6 +12,17 @@ export default function Loading() {
                 <Skeleton className="h-5 w-[95%]" />
                 <Skeleton className="h-5 w-[80%]" />
                 <Skeleton className="h-5 w-[90%]" />
+              </div>
+              <Skeleton className="mt-1 h-5 w-[100px]" />
+            </div>
+          ))}
+        </div>
+        <div className="flex flex-col divide-y-2">
+          {Array.from({ length: 5 }).map((_, index: number) => (
+            <div key={index} className="my-3">
+              <div className="mt-3 flex flex-col gap-2">
+                <Skeleton className="h-5 w-[95%]" />
+                <Skeleton className="h-5 w-[80%]" />
               </div>
               <Skeleton className="mt-1 h-5 w-[100px]" />
             </div>

@@ -24,7 +24,7 @@ export default function LatestNewsList() {
 
   if (error) return "Error";
   return (
-    <div className="flex max-h-[600px] w-[300px] flex-col justify-start divide-y-2 overflow-y-auto rounded-md border px-3">
+    <div className="hidden max-h-[600px] w-[300px] flex-col justify-start divide-y-2 overflow-y-auto rounded-md border px-3 md:flex">
       <p className="py-2 text-lg font-bold">Последние новости</p>
       {data.news.slice(0, 4).map((news: News, index: number) => (
         <Link

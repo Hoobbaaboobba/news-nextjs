@@ -41,10 +41,13 @@ export function NewsCarousel() {
         </p>
         <CarouselContent>
           {data.news.slice(18).map((news: News, index: number) => (
-            <CarouselItem key={index} className="basis-1/5">
+            <CarouselItem
+              key={index}
+              className="basis-2/3 sm:basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/5"
+            >
               <Link href={`/${news.category[0]}/${news.id}`}>
-                <Card className="mx-6 mb-6 mt-20 h-[300px] w-full border-b-4 border-white/30 bg-transparent">
-                  <CardContent className="relative p-1">
+                <Card className="relative mx-6 mb-6 mt-20 h-[300px] w-full border-b-4 border-white/30 bg-transparent">
+                  <CardContent className="p-1">
                     {news.image === "None" ? (
                       <div className="mb-1 flex aspect-video w-full items-center justify-center rounded-md bg-gray-500">
                         <span className="text-4xl font-bold text-black/10">
@@ -60,8 +63,8 @@ export function NewsCarousel() {
                         }}
                       ></div>
                     )}
-                    <div className="absolute flex h-full -translate-y-6 flex-col justify-between px-4 text-white">
-                      <span className="line-clamp-4 text-lg font-bold">
+                    <div className="absolute bottom-0 flex -translate-y-2 flex-col justify-between gap-2 px-4 text-white sm:-translate-y-3 md:-translate-y-4 lg:-translate-y-5 xl:-translate-y-6">
+                      <span className="text-md line-clamp-4 font-bold sm:text-lg">
                         {news.title}
                       </span>
                       <span className="text-[12px]">
@@ -77,7 +80,7 @@ export function NewsCarousel() {
         <CarouselPrevious />
         <CarouselNext />
       </Carousel>
-      <NewsPagination />
+      {/* <NewsPagination /> */}
     </div>
   );
 }

@@ -1,14 +1,19 @@
-import { formatDate } from "@/shared/DateFormatter";
-import { BurgerMenu } from "./BurgerMenu";
+"use client";
+
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Logo } from "./Logo";
+import { Menu } from "./Menu";
 
 export default function Header() {
+  const queryClient = new QueryClient();
   return (
-    <header className="flex w-full items-center justify-center">
-      <div className="flex w-full max-w-[1400px] items-center gap-3 py-8">
-        <BurgerMenu />
-        <Logo />
-      </div>
-    </header>
+    <QueryClientProvider client={queryClient}>
+      <header className="flex w-full items-center justify-center">
+        <div className="flex w-full max-w-[1400px] items-center justify-between gap-3 px-4 py-8">
+          <Logo />
+          <Menu />
+        </div>
+      </header>
+    </QueryClientProvider>
   );
 }

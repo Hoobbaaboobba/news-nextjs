@@ -1,4 +1,9 @@
+"use client";
+
 import { News } from "@/widgets/News";
+import { BottomNews } from "@/widgets/News/ui/BottomNews";
+import { NewsCarousel } from "@/widgets/News/ui/NewsCarousel";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 interface CategoryNewsPageProps {
   params: {
@@ -8,5 +13,12 @@ interface CategoryNewsPageProps {
 }
 
 export default function CategoryNewsPage({ params }: CategoryNewsPageProps) {
-  return <News params={params} />;
+  const queryClient = new QueryClient();
+  return (
+    <QueryClientProvider client={queryClient}>
+      <News params={params} />
+      <NewsCarousel />
+      <BottomNews />
+    </QueryClientProvider>
+  );
 }

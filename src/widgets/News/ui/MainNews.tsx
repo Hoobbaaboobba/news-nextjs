@@ -7,9 +7,10 @@ import { newsApi } from "../../../../newsApi";
 import Link from "next/link";
 import Loading from "./Loading";
 import { NewsPagination } from "./NewsPagination";
-import { useSearchParams } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { transliterateText } from "@/widgets/NewsLinks/transliterate";
 import { NewsCarousel } from "./NewsCarousel";
+import { useEffect } from "react";
 
 interface MainNewsProps {
   params?: {
@@ -18,15 +19,12 @@ interface MainNewsProps {
   };
 }
 
-export function MainNews() {
-  const searchParams = useSearchParams();
-  const queryPageNumber = searchParams.get("page") || "1";
-
+export function MainNews({ params }: MainNewsProps) {
   const { isPending, error, data } = useQuery({
     queryKey: ["mainNews"],
     queryFn: () =>
       fetch(
-        `https://api.currentsapi.services/v1/latest-news?language=ru&apiKey=bUNuSqsvvREM5YGxOCgRlxD_7egP2CxbWO44AMiMA-HAk9s8&page_number=${queryPageNumber}`,
+        `https://api.currentsapi.services/v1/search?language=ru&apiKey=bUNuSqsvvREM5YGxOCgRlxD_7egP2CxbWO44AMiMA-HAk9s8&category=${params?.category}`,
       ).then((res) => res.json()),
   });
 
@@ -35,7 +33,7 @@ export function MainNews() {
   if (error) return "Error";
 
   return (
-    <div className="grid w-full max-w-[900px] grid-cols-3 gap-4">
+    <div className="grid w-full max-w-[900px] gap-4 sm:grid-cols-2 lg:grid-cols-3">
       <div className="flex flex-col divide-y-2">
         {data.news.slice(1, 4).map((news: News, index: number) => (
           <Link
