@@ -35,7 +35,7 @@ export function MainNews({ params }: MainNewsProps) {
     queryKey: ["mainNews"],
     queryFn: () =>
       fetch(
-        `https://api.currentsapi.services/v1/search?language=ru&apiKey=bUNuSqsvvREM5YGxOCgRlxD_7egP2CxbWO44AMiMA-HAk9s8&page_number=${queryPageNumber}`,
+        `https://api.currentsapi.services/v1/search?language=ru&apiKey=bUNuSqsvvREM5YGxOCgRlxD_7egP2CxbWO44AMiMA-HAk9s8&page_number=${queryPageNumber}&category=${params?.category}`,
       ).then((res) => res.json()),
   });
 
