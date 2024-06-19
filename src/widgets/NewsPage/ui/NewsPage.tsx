@@ -18,7 +18,7 @@ export default function NewsPage({ params }: NewsPageProps) {
     queryKey: ["newsPage"],
     queryFn: () =>
       fetch(
-        `https://api.currentsapi.services/v1/latest-news?language=ru&apiKey=bUNuSqsvvREM5YGxOCgRlxD_7egP2CxbWO44AMiMA-HAk9s8&page_size=200&category=${params.category}`,
+        `https://api.currentsapi.services/v1/search?language=ru&apiKey=bUNuSqsvvREM5YGxOCgRlxD_7egP2CxbWO44AMiMA-HAk9s8&page_size=200&category=${params.category}`,
       ).then((res) => res.json()),
   });
 
