@@ -9,32 +9,32 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/shared/ui/pagination";
+import { useQuery } from "@tanstack/react-query";
 import { useRouter, useSearchParams } from "next/navigation";
 
 export function NewsPagination() {
   const searchParams = useSearchParams();
   const pageNumber = parseInt(searchParams.get("page") as string);
-  const router = useRouter();
 
-  function redirectTo(index: number) {
-    router.push(`?page=${index + 1}`);
-    window.scrollTo({ top: 0 });
-    return window.location.reload();
-  }
-
+  const { refetch } = useQuery({
+    queryKey: ["mainNews"],
+    queryFn: () =>
+      fetch(
+        `https://api.currentsapi.services/v1/search?language=ru&apiKey=bUNuSqsvvREM5YGxOCgRlxD_7egP2CxbWO44AMiMA-HAk9s8&page_number=${pageNumber}`,
+      ).then((res) => res.json()),
+  });
   return (
     <Pagination className="mt-10">
       <PaginationContent>
         <PaginationItem>
           <PaginationPrevious
-            // onClick={() => redirectTo()}
-            href={`?page=${pageNumber - 1}`}
+            onClick={() => refetch()}
+            href={`?page=${pageNumber > 0 ? pageNumber - 1 : "1"}`}
           />
         </PaginationItem>
         {Array.from({ length: 10 }).map((_, index) => (
-          <PaginationItem key={index}>
+          <PaginationItem onClick={() => refetch()} key={index}>
             <PaginationLink
-              // onClick={redirectTo}
               href={`?page=${index + 1}`}
               isActive={pageNumber === index + 1}
             >
@@ -44,8 +44,8 @@ export function NewsPagination() {
         ))}
         <PaginationItem>
           <PaginationNext
-            // onClick={redirectTo}
-            href={`?page=${pageNumber + 1}`}
+            onClick={() => refetch()}
+            href={`?page=${pageNumber < 10 ? pageNumber + 1 : "10"}`}
           />
         </PaginationItem>
       </PaginationContent>

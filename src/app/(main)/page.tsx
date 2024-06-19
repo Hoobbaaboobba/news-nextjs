@@ -3,6 +3,7 @@
 import { News } from "@/widgets/News";
 import { BottomNews } from "@/widgets/News/ui/BottomNews";
 import { NewsCarousel } from "@/widgets/News/ui/NewsCarousel";
+import { NewsPagination } from "@/widgets/News/ui/NewsPagination";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Suspense } from "react";
 

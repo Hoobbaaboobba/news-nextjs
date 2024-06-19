@@ -50,14 +50,6 @@ export function Menu() {
           </Link>
         </Button>
       </li>
-      <li>
-        <Button className="text-lg" variant="ghost" asChild>
-          <Link className="flex gap-2" href={`/fashion`}>
-            <Palette />
-            <span>Мода</span>
-          </Link>
-        </Button>
-      </li>
     </ul>
   );
 }
