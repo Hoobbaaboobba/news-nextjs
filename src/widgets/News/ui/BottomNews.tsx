@@ -27,12 +27,8 @@ export function BottomNews() {
       <div className="grid w-full gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
         <div className="flex flex-col divide-y-2">
           {data.news.slice(30, 40).map((news: News, index: number) => (
-            <div className="relative py-4">
-              <Link
-                href={`/${news.category[0]}/${news.id}`}
-                key={index}
-                className="py-3"
-              >
+            <div className="relative py-4" key={index}>
+              <Link href={`/${news.category[0]}/${news.id}`} className="py-3">
                 {news.image === "None" && index % 7 === 0 ? (
                   <div className="mb-1 flex aspect-video w-full items-center justify-center bg-gray-200">
                     <span className="text-4xl font-bold text-black/10">
@@ -67,12 +63,8 @@ export function BottomNews() {
         </div>
         <div className="flex flex-col divide-y-2">
           {data.news.slice(40, 50).map((news: News, index: number) => (
-            <div className="relative py-4">
-              <Link
-                href={`/${news.category[0]}/${news.id}`}
-                key={index}
-                className="py-3"
-              >
+            <div className="relative py-4" key={index}>
+              <Link href={`/${news.category[0]}/${news.id}`} className="py-3">
                 {news.image === "None" && index !== 0 && index % 5 == 0 ? (
                   <div className="mb-1 flex aspect-video w-full items-center justify-center bg-gray-200">
                     <span className="text-4xl font-bold text-black/10">
@@ -108,12 +100,8 @@ export function BottomNews() {
         </div>
         <div className="flex flex-col divide-y-2">
           {data.news.slice(50, 60).map((news: News, index: number) => (
-            <div className="relative py-4">
-              <Link
-                href={`/${news.category[0]}/${news.id}`}
-                key={index}
-                className="py-3"
-              >
+            <div className="relative py-4" key={index}>
+              <Link href={`/${news.category[0]}/${news.id}`} className="py-3">
                 {news.image === "None" && index !== 0 && index % 4 === 0 ? (
                   <div className="mb-1 flex aspect-video w-full items-center justify-center bg-gray-200">
                     <span className="text-4xl font-bold text-black/10">
@@ -149,12 +137,8 @@ export function BottomNews() {
         </div>
         <div className="flex flex-col divide-y-2">
           {data.news.slice(60, 70).map((news: News, index: number) => (
-            <div className="relative py-4">
-              <Link
-                href={`/${news.category[0]}/${news.id}`}
-                key={index}
-                className="py-3"
-              >
+            <div className="relative py-4" key={index}>
+              <Link href={`/${news.category[0]}/${news.id}`} className="py-3">
                 {news.image === "None" && index !== 0 && index % 8 === 0 ? (
                   <div className="mb-1 flex aspect-video w-full items-center justify-center bg-gray-200">
                     <span className="text-4xl font-bold text-black/10">
