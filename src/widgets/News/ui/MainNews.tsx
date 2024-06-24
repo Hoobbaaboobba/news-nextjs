@@ -14,6 +14,7 @@ import { useEffect } from "react";
 import {
   Pagination,
   PaginationContent,
+  PaginationEllipsis,
   PaginationItem,
   PaginationLink,
   PaginationNext,
@@ -121,7 +122,11 @@ export function MainNews({ params }: MainNewsProps) {
             />
           </PaginationItem>
           {Array.from({ length: 10 }).map((_, index) => (
-            <PaginationItem onClick={() => refetch()} key={index}>
+            <PaginationItem
+              className={`${index + 1 > 3 && "hidden lg:block"}`}
+              onClick={() => refetch()}
+              key={index}
+            >
               <PaginationLink
                 href={`?page=${index + 1}`}
                 isActive={parseInt(queryPageNumber as string) === index + 1}
@@ -130,6 +135,9 @@ export function MainNews({ params }: MainNewsProps) {
               </PaginationLink>
             </PaginationItem>
           ))}
+          <PaginationItem className="lg:hidden">
+            <PaginationEllipsis />
+          </PaginationItem>
           <PaginationItem>
             <PaginationNext
               onClick={() => refetch()}
