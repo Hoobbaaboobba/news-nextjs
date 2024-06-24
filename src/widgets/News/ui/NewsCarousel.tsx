@@ -75,7 +75,7 @@ export function NewsCarousel() {
                   </CardContent>
                 </Card>
               </Link>
-              <div className="absolute bottom-11 right-0">
+              <div className="absolute bottom-9 right-0 md:bottom-11">
                 <CopyLinkButton category={news.category[0]} id={news.id} />
               </div>
             </CarouselItem>
