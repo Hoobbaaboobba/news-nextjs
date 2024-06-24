@@ -15,9 +15,9 @@ export function BurgerMenu() {
         <SheetTrigger>
           <Menu className="h-8 w-8" />
         </SheetTrigger>
-        <SheetContent className="flex flex-col items-start justify-start">
+        <SheetContent className="flex w-[80%] flex-col items-start justify-start px-2 pt-4">
           <SheetClose asChild>
-            <Button className="text-lg" variant="ghost" asChild>
+            <Button className="text-md" variant="ghost" asChild>
               <Link className="flex gap-2" href={`/general`}>
                 <Atom />
                 <span>Общее</span>
@@ -25,7 +25,7 @@ export function BurgerMenu() {
             </Button>
           </SheetClose>
           <SheetClose asChild>
-            <Button className="text-lg" variant="ghost" asChild>
+            <Button className="text-md" variant="ghost" asChild>
               <Link className="flex gap-2" href={`/software`}>
                 <Router />
                 <span>Программное обеспечение</span>
@@ -33,7 +33,7 @@ export function BurgerMenu() {
             </Button>
           </SheetClose>
           <SheetClose asChild>
-            <Button className="text-lg" variant="ghost" asChild>
+            <Button className="text-md" variant="ghost" asChild>
               <Link className="flex gap-2" href={`/security`}>
                 <GlobeLock />
                 <span>Безопасность</span>
