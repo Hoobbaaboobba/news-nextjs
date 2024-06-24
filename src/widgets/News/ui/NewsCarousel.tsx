@@ -16,6 +16,7 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { NewsPagination } from "./NewsPagination";
 import CarouselLoading from "./CarouselLoader";
+import { CopyLinkButton } from "@/widgets/CopyLink/ui/CopyLinkButton";
 
 export function NewsCarousel() {
   const searchParams = useSearchParams();
@@ -43,7 +44,7 @@ export function NewsCarousel() {
           {data.news.slice(18).map((news: News, index: number) => (
             <CarouselItem
               key={index}
-              className="basis-2/3 sm:basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/5"
+              className="relative basis-2/3 sm:basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/5"
             >
               <Link href={`/${news.category[0]}/${news.id}`}>
                 <Card className="relative mx-6 mb-6 mt-20 h-[300px] w-full border-b-4 border-white/30 bg-transparent">
@@ -74,6 +75,9 @@ export function NewsCarousel() {
                   </CardContent>
                 </Card>
               </Link>
+              <div className="absolute bottom-11 right-0">
+                <CopyLinkButton category={news.category[0]} id={news.id} />
+              </div>
             </CarouselItem>
           ))}
         </CarouselContent>

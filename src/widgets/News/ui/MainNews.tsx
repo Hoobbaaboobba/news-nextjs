@@ -20,6 +20,7 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/shared/ui/pagination";
+import { CopyLinkButton } from "@/widgets/CopyLink/ui/CopyLinkButton";
 
 interface MainNewsProps {
   params?: {
@@ -50,65 +51,76 @@ export function MainNews({ params }: MainNewsProps) {
         <div className="grid w-full max-w-[900px] gap-4 sm:grid-cols-2 lg:grid-cols-3">
           <div className="flex flex-col divide-y-2">
             {data.news.slice(1, 4).map((news: News, index: number) => (
-              <Link
-                href={`/${news.category[0]}/${news.id}`}
-                key={index}
-                className="py-3"
-              >
-                {news.image === "None" && index === 0 ? (
-                  <div className="mb-1 flex aspect-video w-full items-center justify-center bg-gray-200">
-                    <span className="text-4xl font-bold text-black/10">
-                      News.ru
-                    </span>
-                  </div>
-                ) : (
-                  index === 0 && (
-                    <div
-                      className="mb-1 aspect-video w-full bg-cover bg-center bg-no-repeat"
-                      style={{
-                        backgroundImage: `url(${news.image})`,
-                        backgroundSize: "object-fit",
-                      }}
-                    ></div>
-                  )
-                )}
-                <h2
-                  className={`${index === 0 ? "text-md font-bold" : "text-sm"}`}
-                >
-                  {news.title}
-                </h2>
-                <span className="text-[12px] text-black/40">
-                  {formatDate(news.published)}
-                </span>
-              </Link>
+              <div className="relative py-4">
+                <Link href={`/${news.category[0]}/${news.id}`} key={index}>
+                  {news.image === "None" && index === 0 ? (
+                    <div className="mb-1 flex aspect-video w-full items-center justify-center bg-gray-200">
+                      <span className="text-4xl font-bold text-black/10">
+                        News.ru
+                      </span>
+                    </div>
+                  ) : (
+                    index === 0 && (
+                      <div
+                        className="mb-1 aspect-video w-full bg-cover bg-center bg-no-repeat"
+                        style={{
+                          backgroundImage: `url(${news.image})`,
+                          backgroundSize: "object-fit",
+                        }}
+                      ></div>
+                    )
+                  )}
+                  <h2
+                    className={`${index === 0 ? "text-md font-bold" : "text-sm"}`}
+                  >
+                    {news.title}
+                  </h2>
+                  <span className="relative text-[12px] text-black/40">
+                    {formatDate(news.published)}{" "}
+                  </span>
+                </Link>
+                <div className="absolute bottom-4 right-0">
+                  <CopyLinkButton category={news.category[0]} id={news.id} />
+                </div>
+              </div>
             ))}
           </div>
           <div className="flex flex-col divide-y-2">
             {data.news.slice(4, 9).map((news: News, index: number) => (
-              <Link
-                href={`/${news.category[0]}/${news.id}`}
-                key={index}
-                className="py-3"
-              >
-                <h2 className="text-sm">{news.title}</h2>
-                <span className="text-[12px] text-black/40">
-                  {formatDate(news.published)}
-                </span>
-              </Link>
+              <div className="relative py-4">
+                <Link
+                  href={`/${news.category[0]}/${news.id}`}
+                  key={index}
+                  className="py-3"
+                >
+                  <h2 className="text-sm">{news.title}</h2>
+                  <span className="text-[12px] text-black/40">
+                    {formatDate(news.published)}
+                  </span>
+                </Link>
+                <div className="absolute bottom-4 right-0">
+                  <CopyLinkButton category={news.category[0]} id={news.id} />
+                </div>
+              </div>
             ))}
           </div>
           <div className="flex flex-col divide-y-2">
             {data.news.slice(9, 14).map((news: News, index: number) => (
-              <Link
-                href={`/${news.category[0]}/${news.id}`}
-                key={index}
-                className="py-3"
-              >
-                <h2 className="text-sm">{news.title}</h2>
-                <span className="text-[12px] text-black/70">
-                  {formatDate(news.published)}
-                </span>
-              </Link>
+              <div className="relative py-4">
+                <Link
+                  href={`/${news.category[0]}/${news.id}`}
+                  key={index}
+                  className="py-3"
+                >
+                  <h2 className="text-sm">{news.title}</h2>
+                  <span className="text-[12px] text-black/70">
+                    {formatDate(news.published)}
+                  </span>
+                </Link>
+                <div className="absolute bottom-4 right-0">
+                  <CopyLinkButton category={news.category[0]} id={news.id} />
+                </div>
+              </div>
             ))}
           </div>
         </div>

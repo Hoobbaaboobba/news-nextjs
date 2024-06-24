@@ -5,6 +5,7 @@ import { newsApi } from "../../../../newsApi";
 import Loading from "./Loading";
 import { formatDate } from "@/shared/DateFormatter";
 import Link from "next/link";
+import { CopyLinkButton } from "@/widgets/CopyLink/ui/CopyLinkButton";
 
 interface NewsPageProps {
   params: {
@@ -49,7 +50,12 @@ export default function NewsPage({ params }: NewsPageProps) {
                 ></div>
               )
             )}
-            <span className="text-black/70">{formatDate(news.published)}</span>
+            <span className="flex items-center justify-between text-black/70">
+              {formatDate(news.published)}
+              <div className="">
+                <CopyLinkButton category={news.category[0]} id={news.id} />
+              </div>
+            </span>
             <h2 className="mt-1 text-3xl font-bold">{news.title}</h2>
             <p className="mt-3">
               {news.description}{" "}
